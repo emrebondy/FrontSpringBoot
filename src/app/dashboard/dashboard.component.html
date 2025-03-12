@@ -1,0 +1,43 @@
+<div class="dashboard-container">  
+  <div *ngIf="role === 'admin'">
+    <p>Bienvenue, vous êtes connecté en tant qu'Admin.</p>
+  </div>
+
+  <div *ngIf="role === 'user'">
+    <p>Bienvenue, vous êtes connecté en tant qu'Utilisateur.</p>
+  </div>
+
+  <div *ngIf="role === null">
+    <p>Aucun rôle trouvé. Veuillez vous connecter.</p>
+  </div>
+</div>
+
+<h2>Liste des annonces</h2>
+<ul>
+  <li *ngFor="let annonce of annonces" (click)="selectAnnonce(annonce)">
+    {{ annonce.title }}
+  </li>
+</ul>
+
+<div *ngIf="selectedAnnonce">
+  <h3>Détails de l'annonce</h3>
+  <p><strong>Titre :</strong> {{ selectedAnnonce.title }}</p>
+  <p><strong>Description :</strong> {{ selectedAnnonce.description }}</p>
+  <p><strong>Adresse :</strong> {{ selectedAnnonce.adress }}</p>
+  <p><strong>Email :</strong> {{ selectedAnnonce.mail }}</p>
+  <p><strong>Date :</strong> {{ selectedAnnonce.date }}</p>
+
+  <button (click)="deleteAnnonce(selectedAnnonce.id)">Supprimer</button>
+  <button (click)="enableEdit()">Modifier</button>
+
+  <div *ngIf="editMode">
+    <h3>Modifier l'annonce</h3>
+    <label>Titre: <input [(ngModel)]="selectedAnnonce.title"></label><br>
+    <label>Description: <input [(ngModel)]="selectedAnnonce.description"></label><br>
+    <label>Adresse: <input [(ngModel)]="selectedAnnonce.adress"></label><br>
+    <label>Email: <input [(ngModel)]="selectedAnnonce.mail"></label><br>
+    <button (click)="updateAnnonce()">Enregistrer</button>
+  </div>
+</div>
+
+  
