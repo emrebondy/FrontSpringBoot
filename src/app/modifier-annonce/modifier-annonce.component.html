@@ -1,0 +1,29 @@
+<body>
+<form [formGroup]="annonceForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Titre</label>
+      <input id="title" formControlName="title" type="text" required />
+    </div>
+  
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" required></textarea>
+    </div>
+  
+    <div>
+      <label for="adress">Adresse</label>
+      <input id="adress" formControlName="adress" type="text" required />
+    </div>
+  
+    <div>
+      <label for="mail">E-mail</label>
+      <input id="mail" formControlName="mail" type="email" required />
+    </div>
+  
+    <div>
+      <button type="submit" [disabled]="!annonceForm.valid">Mettre à jour</button>
+      <button (click)="goBack()">Retour</button>
+    </div>
+  </form>
+  
+</body>

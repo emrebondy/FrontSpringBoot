@@ -14,19 +14,16 @@ export class NavComponent {
   constructor(private router: Router, private authService:AuthService) {}
 
 
-  // Vérifie si un rôle est présent dans le localStorage
   isUserConnected(): boolean {
-    const role = sessionStorage.getItem('role'); // Utilisation de sessionStorage
+    const role = sessionStorage.getItem('role');
     console.log("dans isUserCONNECTED : " + role);
     return role !== null;
   }
 
-  // Redirige vers la page de connexion
   goToLogin(): void {
     this.router.navigate(['/login']);
   }
 
-  // Change de rôle (par exemple, admin -> user ou inversement)
   changeRole(): void {
     const currentRole = sessionStorage.getItem('role');
     if (currentRole === 'admin') {
@@ -34,14 +31,12 @@ export class NavComponent {
     } else {
         sessionStorage.setItem('role', 'admin');
     }
-    // Optionnellement, recharger la page pour appliquer les changements immédiatement
     window.location.reload();
 }
 
-// Déconnexion de l'utilisateur
 logout(): void {
     sessionStorage.removeItem('role');
-    this.router.navigate(['/login']);  // Redirige vers la page de connexion
+    this.router.navigate(['/login']); 
 }
 
 

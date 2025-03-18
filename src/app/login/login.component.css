@@ -1,4 +1,3 @@
-/* Style global pour la page */
 body {
   background-color: #2196F3;
   font-family: Arial, sans-serif;
@@ -10,7 +9,6 @@ body {
   height: 100vh;
 }
 
-/* Conteneur principal de la page */
 .login-container {
   background-color: #fff;
   padding: 30px;
@@ -25,14 +23,12 @@ h2 {
   color: #333;
 }
 
-/* Conteneur pour les boutons */
 .buttons-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Style général des boutons */
 .login-btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -44,16 +40,15 @@ h2 {
 }
 
 .admin-btn {
-  background-color: #4CAF50; /* Vert pour l'admin */
+  background-color: #4CAF50; 
   color: white;
 }
 
 .user-btn {
-  background-color: #2196F3; /* Bleu pour l'utilisateur */
+  background-color: #2196F3; 
   color: white;
 }
 
-/* Effet au survol */
 .login-btn:hover {
   opacity: 0.9;
 }

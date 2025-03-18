@@ -13,19 +13,17 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
-  role: string | null = '';  // Variable pour stocker le rôle
+  role: string | null = '';
   annonces: EntitiesAnnonce[] = [];
-  selectedAnnonce: EntitiesAnnonce | null = null;
-  editMode: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private annonceService: AnnonceService) {
-    
-  }
-
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private annonceService: AnnonceService
+  ) {}
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
-    console.log("voici le role : " + this.role)
     this.fetchAnnonces();
   }
 
@@ -35,28 +33,24 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  selectAnnonce(annonce: EntitiesAnnonce): void {
-    this.selectedAnnonce = annonce;
-    this.editMode = false;
+  goToDetails(id: number): void {
+    this.router.navigate(['/detailAnnonce', id]);
+  }
+
+  goToEdit(id: number): void {
+    this.router.navigate(['/modifierAnnonce', id]);
   }
 
   deleteAnnonce(id: number): void {
-    this.annonceService.deleteAnnonce(id).subscribe(() => {
-      this.annonces = this.annonces.filter(a => a.id !== id);
-      this.selectedAnnonce = null;
-    });
-  }
+    if (this.role !== 'admin') {
+      alert("Vous n'avez pas la permission de supprimer cette annonce !");
+      return;
+    }
 
-  enableEdit(): void {
-    this.editMode = true;
-  }
-
-  updateAnnonce(): void {
-    if (this.selectedAnnonce) {
-      this.annonceService.updateAnnonce(this.selectedAnnonce.id, this.selectedAnnonce).subscribe(updatedAnnonce => {
-        this.selectedAnnonce = updatedAnnonce;
-        this.editMode = false;
-        this.fetchAnnonces();
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?")) {
+      this.annonceService.deleteAnnonce(id).subscribe(() => {
+        this.annonces = this.annonces.filter(a => a.id !== id);
+        alert("Annonce supprimée avec succès !");
       });
     }
   }

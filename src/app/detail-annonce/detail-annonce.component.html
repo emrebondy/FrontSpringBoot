@@ -1,0 +1,16 @@
+<body>
+<div *ngIf="annonce">
+  <h2>Détails de l'annonce</h2>
+  <p><strong>Titre :</strong> {{ annonce.title }}</p>
+  <p><strong>Description :</strong> {{ annonce.description }}</p>
+  <p><strong>Adresse :</strong> {{ annonce.adress }}</p>
+  <p><strong>Email :</strong> {{ annonce.mail }}</p>
+  <p><strong>Date :</strong> {{ annonce.date }}</p>
+
+  <button (click)="goBack()">Retour</button>
+</div>
+
+<div *ngIf="!annonce">
+  <p>Annonce introuvable.</p>
+</div>
+</body>

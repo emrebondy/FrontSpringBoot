@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import { EntitiesAnnonce } from '../../entities/EntitiesAnnonce';
 import { AuthService } from '../auth.service';
 
@@ -14,7 +14,6 @@ export class AnnonceService {
   private apiUrl = 'http://localhost:8080/annonces';
 
   getRole(): HttpHeaders {
-    // Récupère le rôle de l'utilisateur depuis sessionStorage
     const role = sessionStorage.getItem('role');
     
     let headers = new HttpHeaders();
@@ -25,7 +24,6 @@ export class AnnonceService {
       headers = headers.append('Authorization', 'Basic ' + btoa('user:user'));
     } else {
       console.log("Utilisateur non authentifié");
-      // Retourne un en-tête vide ou un en-tête d'erreur si aucun rôle n'est trouvé
       return new HttpHeaders();
     }
     
@@ -49,6 +47,11 @@ export class AnnonceService {
   updateAnnonce(id: number, annonce: EntitiesAnnonce): Observable<EntitiesAnnonce> {
     let headers = this.getRole()
     return this.http.put<EntitiesAnnonce>(`${this.apiUrl}/${id}`, annonce, { headers });
+  }
+
+  getAnnonceById(id: number):Observable<EntitiesAnnonce>{
+    let headers = this.getRole()
+    return this.http.get<EntitiesAnnonce>(`${this.apiUrl}/${id}`, { headers });
   }
 
   

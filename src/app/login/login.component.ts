@@ -1,9 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, NgModel, NgModelGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +21,10 @@ export class LoginComponent {
     });
   }
 
-  
 
   login(role: string): void {
-    this.authService.setRole(role);  // Stocke le rôle dans sessionStorage
+    this.authService.setRole(role); 
 
-    // Redirige vers le dashboard
     this.router.navigate(['/dashboard']);
   }
 }

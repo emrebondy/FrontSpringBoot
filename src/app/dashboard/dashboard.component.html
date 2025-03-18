@@ -1,3 +1,4 @@
+<body>
 <div class="dashboard-container">  
   <div *ngIf="role === 'admin'">
     <h1>Bienvenue, vous êtes connecté en tant <span> qu'Admin</span> .</h1>
@@ -8,36 +9,19 @@
   </div>
 
   <div *ngIf="role === null">
-    <p>Aucun rôle trouvé. Veuillez vous connecter.</p>
+    <h1>Aucun rôle trouvé. Veuillez vous connecter.</h1>
   </div>
 </div>
 
 <h2>Liste des annonces</h2>
 <ul>
-  <li *ngFor="let annonce of annonces" (click)="selectAnnonce(annonce)">
+  <li *ngFor="let annonce of annonces">
     {{ annonce.title }}
+    <button (click)="goToDetails(annonce.id)">Détails</button>
+    <button (click)="goToEdit(annonce.id)">Modifier</button>
+    <button *ngIf="role === 'admin'" (click)="deleteAnnonce(annonce.id)">Supprimer</button>
   </li>
 </ul>
-
-<div *ngIf="selectedAnnonce">
-  <h3>Détails de l'annonce</h3>
-  <p><strong>Titre :</strong> {{ selectedAnnonce.title }}</p>
-  <p><strong>Description :</strong> {{ selectedAnnonce.description }}</p>
-  <p><strong>Adresse :</strong> {{ selectedAnnonce.adress }}</p>
-  <p><strong>Email :</strong> {{ selectedAnnonce.mail }}</p>
-  <p><strong>Date :</strong> {{ selectedAnnonce.date }}</p>
-
-  <button (click)="deleteAnnonce(selectedAnnonce.id)">Supprimer</button>
-  <button (click)="enableEdit()">Modifier</button>
-
-  <div *ngIf="editMode">
-    <h3>Modifier l'annonce</h3>
-    <label>Titre: <input [(ngModel)]="selectedAnnonce.title"></label><br>
-    <label>Description: <input [(ngModel)]="selectedAnnonce.description"></label><br>
-    <label>Adresse: <input [(ngModel)]="selectedAnnonce.adress"></label><br>
-    <label>Email: <input [(ngModel)]="selectedAnnonce.mail"></label><br>
-    <button (click)="updateAnnonce()">Enregistrer</button>
-  </div>
-</div>
+</body>
 
   
