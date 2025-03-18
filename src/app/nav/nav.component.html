@@ -1,1 +1,17 @@
-<p>nav works!</p>
+<nav class="navbar">
+    <div class="navbar-container">  
+      <div class="nav-links">
+        <!-- Si l'utilisateur n'est pas connecté (pas de rôle dans le localStorage) -->
+        <ng-container *ngIf="!isUserConnected(); else loggedIn">
+          <button (click)="goToLogin()">Connexion</button>
+        </ng-container>
+  
+        <!-- Si l'utilisateur est connecté avec un rôle -->
+        <ng-template #loggedIn>
+          <button (click)="changeRole()">Changer de rôle</button>
+          <button (click)="logout()">Déconnexion</button>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
+  
